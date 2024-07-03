@@ -1,0 +1,70 @@
+/*
+ * Complete the 'caesarCipher' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. STRING s
+ *  2. INTEGER k
+ */
+
+function caesarCipher(s, k) {
+    // Write your code here
+    /*k = k % 26;
+    let s = s;
+    let result='';
+    for(let i = 0;i <= s.length; i++){
+        let char = s[i];
+        
+        if(char >= 'A' && char <= 'Z'){
+            let shifted = String.fromCharCode(((char.charCodeAt(0)-'A'.charCodeAt(0)+k)%26)+ 'A'.charCodeAt(0));
+            result += shifted;
+        }else if(char >= 'a' && char <='z'){
+            let shifted = String.fromCharCode(((char.charCodeAt(0)- 'a'.charCodeAt(0)+k)%26)+'a'.charCodeAt(0));
+            result += shifted;
+        }else{
+            result += char;
+        }
+    }
+    return result;*/
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    
+    // Initialize an empty result string
+    let result = '';
+    
+    // Normalize k to ensure it falls within 0-25
+    k = k % 26;
+
+    // Loop through each character in the input string
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+        
+        // Check if the character is a letter
+        if (alphabet.includes(char.toLowerCase())) {
+            // Determine if the character is uppercase or lowercase
+            let isUpperCase = char === char.toUpperCase();
+            
+            // Find the current position in the alphabet
+            let currentIndex = alphabet.indexOf(char.toLowerCase());
+            
+            // Calculate the new position with wrapping
+            let newIndex = (currentIndex + k) % 26;
+            
+            // Get the new character
+            let newChar = alphabet[newIndex];
+            
+            // If the original character was uppercase, convert the new character to uppercase
+            if (isUpperCase) {
+                newChar = newChar.toUpperCase();
+            }
+            
+            // Append the new character to the result string
+            result += newChar;
+        } else {
+            // If the character is not a letter, leave it as it is
+            result += char;
+        }
+    }
+    
+    // Return the final encoded string
+    return result;
+}
